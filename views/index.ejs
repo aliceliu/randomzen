@@ -1,10 +1,11 @@
 <style>
     h1 {
         text-align: center;
+        font-size: 50px;
     }
     p {
         text-align: center;
-        font-size: 20px;
+        font-size: 30px;
     }
     form {
         text-align: center;
@@ -14,6 +15,28 @@
         position: relative;
         top: -100;
     }
+    body {
+        background-image: url('/tree.jpg');
+        background-repeat: no-repeat;
+        background-position:center; 
+        background-color: black;
+        
+    }
+    #title, #para {
+        background-color:rgba(255,255,255,0.5);
+        width: 1200px;
+        text-align: center;
+        
+    }
+    #title {
+    	margin-top: 30px;
+    	margin-bottom: 20px;
+    	height: 100px;
+    	padding-top: 1px;
+    	padding-bottom: 1px;
+    	
+    }
+
 </style>
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
 <script>
@@ -26,6 +49,8 @@
 	}
 	var leaves = [];
 	var duration;
+	
+	
 	
 	
 	var addLeaf = function() {
@@ -41,7 +66,7 @@
 				
 		}
 		img.onload = drawBackground;
-		img.src = "http://www.azlandscapecreations.com/Portals/118572/images/leaf.jpg";
+		img.src = "http://www.pixelscrapper.com/legacy/sites/default/files/imagecache/resize_500_nocrop/assets/user-1/node-1368/image/marisa-lerin-fall-leaf-2-asset-embellishment-ephemera-commercial-use.png";
 		leaves.push(img);
 		
 		duration = Math.random() * 30 * 1000; 
@@ -77,6 +102,10 @@
 	    //ctx.rotate(90*Math.PI/180);
 	}
 		
+	var change = function() {
+		var animateInterval = setInterval(function(){animate()},150);
+		var changeDirectionInterval = setInterval(function(){changeDirection()},5000);
+	}
 		
     var Main = function() {
         q=$('#thing').text();
@@ -93,12 +122,8 @@
 		
 		var duration = Math.random() * 2 * 1000; 
         setTimeout('addLeaf()', duration);
-		
-		
-		
-		
-		var animateInterval = setInterval(function(){animate()},150);
-		var changeDirectionInterval = setInterval(function(){changeDirection()},5000);
+        
+		setTimeout('change()', duration+2000);
 			
 		
 		$('body').append(canvas);
@@ -107,7 +132,7 @@
         
     $(document).ready(Main);
 </script>
-<h1> What should I do? </h1>
+<center><div id="title"><h1> What should I do? </h1></div></center>
 <form method="GET">
     <!--<input type="text" name="box1">
     <select>
@@ -122,7 +147,7 @@
     <div><%- user_input %></div>
 <% } %>-->
 
-<p id="thing"> I should <%- verb %> <%- noun %>, <%- verb2 %> <%- noun2 %>, and be <%- adj %></p> 
+<center><div id="para"><p id="thing"> I should <%- verb %> <%- noun %>, <%- verb2 %> <%- noun2 %>, and be <%- adj %></p></div></center>
 
 <audio autoplay="autoplay" id="voice" type="audio/mp3">
 </audio>
