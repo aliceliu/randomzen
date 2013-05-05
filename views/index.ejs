@@ -1,0 +1,78 @@
+<style>
+    h1 {
+        text-align: center;
+    }
+    p {
+        text-align: center;
+        font-size: 20px;
+    }
+    form {
+        text-align: center;
+    }
+    
+</style>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script>
+	var canvas;
+	var ctx;
+    function Main() {
+        q=$('#thing').text();
+        $('#voice').prop("src", "http://tts-api.com/tts.mp3?q="+q);
+        
+        
+        canvas = document.createElement('canvas');
+		ctx = canvas.getContext('2d');
+		
+		canvas.width = $(window).width();
+		canvas.height = $(window).height();
+		
+		
+		
+		var images = []
+		for (var i=0; i<42; i++) {
+		    var img = new Image();
+			function drawBackground() {
+			    img.x = Math.floor(Math.random()*$(window).width());
+			    img.y = Math.floor(Math.random()*$(window).height());
+			    ctx.drawImage(img, img.x, img.y, 50, 70);
+			    
+			    
+			}
+			img.onload = drawBackground;
+			img.src = "http://upload.wikimedia.org/wikipedia/commons/c/c6/Freeman_maple_leaf.jpg";
+			images.push(img);
+			
+		}
+		
+		$('body').append(canvas);
+		
+		var moveLeaf(img) {
+		    
+		    
+		}
+        
+        
+       
+	}
+        
+    $(document).ready(Main);
+</script>
+<h1> What should I do? </h1>
+<form method="GET">
+    <!--<input type="text" name="box1">
+    <select>
+      <option value="Confucius">Confucius</option>
+      <option value=""></option>
+      <option value=""></option>
+      <option value="own"></option>
+    </select>-->
+</form>
+<!--<p> You wrote: </p>
+<% if (locals.user_input != undefined) { %>
+    <div><%- user_input %></div>
+<% } %>-->
+
+<p id="thing"> I should <%- verb %> <%- noun %>, <%- verb2 %> <%- noun2 %>, and be <%- adj %></p> 
+
+<audio autoplay="autoplay" id="voice" type="audio/mp3">
+</audio>
