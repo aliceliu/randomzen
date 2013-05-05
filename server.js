@@ -10,7 +10,7 @@ var app = express();
 var home = function(req, res) {
     //res.send("hello world");
     request({url:"https://archive.org/stream/houseofmirth00284gut/284.txt"}, 
-    //request({url:"https://archive.org/stream/thesayingsofconf24055gut/pg24055.txt"},
+    //request({url:"http://paulyhart.blogspot.com/2011/10/hitchhikers-guide-to-galaxy-text_28.html"},
     function (error, response, body) {
         if (!error && response.statusCode == 200) {
           //console.log(body) // Print the google web page.

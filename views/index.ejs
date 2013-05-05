@@ -9,15 +9,77 @@
     form {
         text-align: center;
     }
-    
+    #myCanvas {
+        z-index: -1;
+        position: relative;
+        top: -100;
+    }
 </style>
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
 <script>
 	var canvas;
 	var ctx;
-    function Main() {
+	var Leaf = function() {
+		this.img;
+		this.x;
+		this.y = 0;
+	}
+	var leaves = [];
+	var duration;
+	
+	
+	var addLeaf = function() {
+		var img = new Image();
+		function drawBackground() {
+			var x =  Math.floor(Math.random()*$(window).width());
+			ctx.drawImage(img, x, 0, 70, 70);
+		   
+			var leaf = new Leaf();
+			leaf.x = x;
+			leaf.img = img;
+			leaves.push(leaf);
+				
+		}
+		img.onload = drawBackground;
+		img.src = "http://images.fineartamerica.com/images-medium-large/fall-leaf-carlos-caetano.jpg";
+		leaves.push(img);
+		
+		duration = Math.random() * 10 * 1000; 
+        setTimeout('addLeaf()', duration);
+		
+	}
+	
+	var x_offset = 10;
+	var y_offset = 10;
+	var animate = function(){
+		for (var i=0; i<leaves.length; i++) {
+		    if (i % 2 != 0 && Math.abs(leaves[i].y - $(window).height()) > 200) {
+		    //console.log(leaves[i].y);
+		    //console.log(Math.abs(leaves[i].y - $(window).height()));
+			leaves[i].x = leaves[i].x + x_offset;
+			leaves[i].y = leaves[i].y + y_offset;
+			}
+		}
+		ctx.clearRect(0, 0, canvas.width, canvas.height);
+		for (var i=0; i<leaves.length; i++) {
+		    if (i % 2 != 0) {
+		    ctx.drawImage(leaves[i].img, leaves[i].x, leaves[i].y, 70, 70);
+		    }
+		}
+	}
+	
+	var changeDirection = function() {
+	    x_offset = Math.random() * 15;
+	    y_offset = Math.random() + 1;
+	    if (Math.random() > 0.5) {
+	        x_offset = -x_offset;
+	    }
+	}
+		
+		
+    var Main = function() {
         q=$('#thing').text();
-        $('#voice').prop("src", "http://tts-api.com/tts.mp3?q="+q);
+        $('#voice').prop("src", "http://tts-api.com/tts.mp3?q="+q); //voice for text
         
         
         canvas = document.createElement('canvas');
@@ -25,31 +87,27 @@
 		
 		canvas.width = $(window).width();
 		canvas.height = $(window).height();
+		canvas.id = "myCanvas";
+		
+		
+		var duration = Math.random() * 2 * 1000; 
+        setTimeout('addLeaf()', duration);
 		
 		
 		
-		var images = []
-		for (var i=0; i<42; i++) {
-		    var img = new Image();
-			function drawBackground() {
-			    img.x = Math.floor(Math.random()*$(window).width());
-			    img.y = Math.floor(Math.random()*$(window).height());
-			    ctx.drawImage(img, img.x, img.y, 50, 70);
-			    
-			    
-			}
-			img.onload = drawBackground;
-			img.src = "http://upload.wikimedia.org/wikipedia/commons/c/c6/Freeman_maple_leaf.jpg";
-			images.push(img);
+		
+		var animateInterval = setInterval(function(){animate()},100);
+		var changeDirectionInterval = setInterval(function(){changeDirection()},5000);
 			
-		}
 		
 		$('body').append(canvas);
 		
-		var moveLeaf(img) {
-		    
-		    
-		}
+		
+		
+		
+		
+		
+		
         
         
        
