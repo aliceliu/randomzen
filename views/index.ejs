@@ -41,10 +41,10 @@
 				
 		}
 		img.onload = drawBackground;
-		img.src = "http://images.fineartamerica.com/images-medium-large/fall-leaf-carlos-caetano.jpg";
+		img.src = "http://www.azlandscapecreations.com/Portals/118572/images/leaf.jpg";
 		leaves.push(img);
 		
-		duration = Math.random() * 10 * 1000; 
+		duration = Math.random() * 30 * 1000; 
         setTimeout('addLeaf()', duration);
 		
 	}
@@ -69,11 +69,12 @@
 	}
 	
 	var changeDirection = function() {
-	    x_offset = Math.random() * 15;
+	    x_offset = Math.random() * 10;
 	    y_offset = Math.random() + 1;
 	    if (Math.random() > 0.5) {
 	        x_offset = -x_offset;
 	    }
+	    //ctx.rotate(90*Math.PI/180);
 	}
 		
 		
@@ -96,20 +97,11 @@
 		
 		
 		
-		var animateInterval = setInterval(function(){animate()},100);
+		var animateInterval = setInterval(function(){animate()},150);
 		var changeDirectionInterval = setInterval(function(){changeDirection()},5000);
 			
 		
 		$('body').append(canvas);
-		
-		
-		
-		
-		
-		
-		
-        
-        
        
 	}
         
