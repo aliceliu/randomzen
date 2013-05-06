@@ -8,9 +8,8 @@ var app = express();
     app.use(express.bodyParser());
 
 var home = function(req, res) {
-    //res.send("hello world");
-    request({url:"https://archive.org/stream/houseofmirth00284gut/284.txt"}, 
-    //request({url:"http://paulyhart.blogspot.com/2011/10/hitchhikers-guide-to-galaxy-text_28.html"},
+    //request({url:"https://archive.org/stream/houseofmirth00284gut/284.txt"}, 
+    request({url:"http://paulyhart.blogspot.com/2011/10/hitchhikers-guide-to-galaxy-text_28.html"},
     function (error, response, body) {
         if (!error && response.statusCode == 200) {
           //console.log(body) // Print the google web page.
@@ -25,13 +24,11 @@ var home = function(req, res) {
           JJ = Object.keys(result["JJ"]);
           adj = JJ[randomIndex(JJ.length)];
 
-          
           verb2 = VBP[randomIndex(VBP.length)];
     
           noun2 = NN[randomIndex(NN.length)];
           
           res.render('index.ejs', {noun:noun, verb:verb, verb2:verb2, noun2:noun2, adj:adj});
-          
           
           NNP = result["NNP"];
         }
@@ -76,4 +73,4 @@ app.get("/", home);
 app.get("/:first", first);
 app.post("/", home2);
 
-app.listen(8080);
+app.listen(80);

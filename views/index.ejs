@@ -11,9 +11,8 @@
         text-align: center;
     }
     #myCanvas {
-        z-index: -1;
         position: relative;
-        top: -100;
+        top: -50;
     }
     body {
         background-image: url('/tree.jpg');
@@ -29,7 +28,7 @@
         
     }
     #title {
-    	margin-top: 30px;
+    	margin-top: 20px;
     	margin-bottom: 20px;
     	height: 100px;
     	padding-top: 1px;
@@ -46,6 +45,7 @@
 		this.img;
 		this.x;
 		this.y = 0;
+		this.stopped = false;
 	}
 	var leaves = [];
 	var duration;
@@ -78,12 +78,13 @@
 	var y_offset = 10;
 	var animate = function(){
 		for (var i=0; i<leaves.length; i++) {
-		    if (i % 2 != 0 && Math.abs(leaves[i].y - $(window).height()) > 200) {
-		    //console.log(leaves[i].y);
-		    //console.log(Math.abs(leaves[i].y - $(window).height()));
-			leaves[i].x = leaves[i].x + x_offset;
-			leaves[i].y = leaves[i].y + y_offset;
-			}
+		    if (Math.abs(leaves[i].y - $(window).height()) < Math.random()*30) {
+		        leaves[i].stopped = true;
+		    }
+		    else if (i % 2 != 0 && !leaves[i].stopped) {
+				leaves[i].x = leaves[i].x + x_offset;
+				leaves[i].y = leaves[i].y + y_offset;
+			} 
 		}
 		ctx.clearRect(0, 0, canvas.width, canvas.height);
 		for (var i=0; i<leaves.length; i++) {
