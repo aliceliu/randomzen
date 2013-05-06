@@ -1,4 +1,4 @@
 randomzen
 =========
 
-first node.js app!
+First node.js app! Basically a random advice giver.
