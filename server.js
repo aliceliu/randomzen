@@ -12,7 +12,6 @@ var home = function(req, res) {
     request({url:"http://paulyhart.blogspot.com/2011/10/hitchhikers-guide-to-galaxy-text_28.html"},
     function (error, response, body) {
         if (!error && response.statusCode == 200) {
-          //console.log(body) // Print the google web page.
           var result = tagData(body);
           
           NN = Object.keys(result["NN"]);
@@ -61,16 +60,16 @@ var tagData = function(data) {
     return result;
 }
 
-var home2 = function(req, res) {
+/*var home2 = function(req, res) {
     res.render('index.ejs', {user_input:req.body.box1});
 }
 
 var first = function(req, res) {
     res.send("Hi" + req.params.first);
-}
+}*/
 
 app.get("/", home);
-app.get("/:first", first);
-app.post("/", home2);
+/*app.get("/:first", first);
+app.post("/", home2);*/
 
 app.listen(80);
